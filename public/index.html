@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="description" content="1st.peter mathias • Full-Stack Architect, Ethical Hacker & Digital Alchemist — code sorcery, red-team mindset, and creative engineering." />
+  <title>1st.peter mathias • dev(Nelly)</title>
+
+  <!-- Tailwind CDN + optimized config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            'pulse-slow': 'pulse 3.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'glow-pulse': 'neonPulse 3s ease-in-out infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <!-- Vanilla Tilt.js (optimized) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" integrity="sha512-K9tDZvc8nQXR1DMuT97sct9f40dilGp97vx7EXjswJA+/mKqJZ8vcZLifZDP+9t08osMLuiIjd4jZ0SM011Q+w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --accent: #a78bfa;
+      --accent-glow: #c084fc;
+      --bg-deep: #020205;
+      --card-bg: rgba(18, 18, 25, 0.75);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-deep);
+      color: #f1f5f9;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: radial-gradient(circle at 20% 30%, #0a0a12, #010101);
+    }
+
+    /* custom neon pulse for avatar ring */
+    @keyframes neonPulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.4), 0 0 0 0 rgba(167, 139, 250, 0.2); }
+      50% { box-shadow: 0 0 0 8px rgba(167, 139, 250, 0.2), 0 0 0 16px rgba(167, 139, 250, 0.1); }
+      100% { box-shadow: 0 0 0 0 rgba(167, 139, 250, 0), 0 0 0 0 rgba(167, 139, 250, 0); }
+    }
+    .avatar-ring {
+      animation: neonPulseRing 2.4s infinite;
+      border-radius: 1.75rem;
+    }
+
+    /* advanced glitch for name */
+    .glitch-text {
+      position: relative;
+      display: inline-block;
+    }
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+    }
+    .glitch-text::before {
+      color: #38bdf8;
+      left: 3px;
+      text-shadow: -2px 0 #f472b6;
+      clip: rect(24px, 550px, 42px, 0);
+      animation: glitchShift 2.8s infinite linear alternate-reverse;
+    }
+    .glitch-text::after {
+      color: #f472b6;
+      left: -3px;
+      text-shadow: 2px 0 #38bdf8;
+      clip: rect(85px, 550px, 140px, 0);
+      animation: glitchShift2 2.4s infinite linear alternate-reverse;
+    }
+    @keyframes glitchShift {
+      0% { clip: rect(31px, 9999px, 44px, 0); transform: skew(0.2deg);}
+      20% { clip: rect(68px, 9999px, 92px, 0); transform: skew(0.6deg);}
+      40% { clip: rect(12px, 9999px, 55px, 0); transform: skew(0.1deg);}
+      100% { clip: rect(77px, 9999px, 115px, 0); transform: skew(0.4deg);}
+    }
+    @keyframes glitchShift2 {
+      0% { clip: rect(72px, 9999px, 110px, 0); transform: skew(0.7deg);}
+      30% { clip: rect(23px, 9999px, 67px, 0); transform: skew(0.3deg);}
+      70% { clip: rect(45px, 9999px, 89px, 0); transform: skew(0.9deg);}
+      100% { clip: rect(93px, 9999px, 128px, 0); transform: skew(0.2deg);}
+    }
+
+    /* link card with animated shine */
+    .link-card {
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      background: rgba(12, 12, 18, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+    }
+    .link-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      border-color: rgba(167, 139, 250, 0.7);
+      background: rgba(22, 22, 32, 0.9);
+      box-shadow: 0 20px 30px -15px rgba(0, 0, 0, 0.5);
+    }
+    .shine-overlay {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transition: left 0.65s ease;
+      pointer-events: none;
+    }
+    .link-card:hover .shine-overlay {
+      left: 120%;
+    }
+
+    /* spotify card modern */
+    .spotify-card {
+      background: rgba(10, 10, 18, 0.7);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(167, 139, 250, 0.35);
+      transition: all 0.25s;
+    }
+
+    .toast-notify {
+      animation: slideUpFade 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+    @keyframes slideUpFade {
+      0% { opacity: 0; transform: translate(-50%, 30px) scale(0.9);}
+      100% { opacity: 1; transform: translate(-50%, 0) scale(1);}
+    }
+
+    /* responsive micro adjustments */
+    @media (max-width: 500px) {
+      .container-custom {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+      .profile-name {
+        font-size: 2.5rem;
+      }
+    }
+
+    /* Pulse animation for demo tracks */
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .track-pulse {
+      animation: subtlePulse 2s ease-in-out infinite;
+    }
+
+    /* Animated music icon styles */
+    @keyframes musicBounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(5deg); }
+    }
+    
+    @keyframes musicPulse {
+      0%, 100% { 
+        text-shadow: 0 0 5px #1DB954, 0 0 10px #1DB954;
+        opacity: 1;
+      }
+      50% { 
+        text-shadow: 0 0 15px #1DB954, 0 0 25px #1DB954, 0 0 35px #1DB954;
+        opacity: 0.9;
+      }
+    }
+    
+    .animated-music-icon {
+      animation: musicBounce 1.5s ease-in-out infinite, musicPulse 2s ease-in-out infinite;
+      display: inline-block;
+      filter: drop-shadow(0 0 5px rgba(29, 185, 84, 0.5));
+    }
+    
+    .music-bars {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-left: 8px;
+    }
+    
+    .bar {
+      width: 3px;
+      height: 12px;
+      background: linear-gradient(180deg, #1DB954, #a78bfa);
+      border-radius: 2px;
+      animation: soundWave 1s ease-in-out infinite;
+    }
+    
+    .bar:nth-child(1) { animation-delay: 0s; height: 10px; }
+    .bar:nth-child(2) { animation-delay: 0.2s; height: 16px; }
+    .bar:nth-child(3) { animation-delay: 0.4s; height: 8px; }
+    .bar:nth-child(4) { animation-delay: 0.6s; height: 14px; }
+    .bar:nth-child(5) { animation-delay: 0.8s; height: 12px; }
+    
+    @keyframes soundWave {
+      0%, 100% { transform: scaleY(0.6); opacity: 0.5; }
+      50% { transform: scaleY(1.2); opacity: 1; }
+    }
+    
+    .spotify-icon-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative">
+
+  <div id="particles-js"></div>
+
+  <main class="relative z-10 max-w-[500px] mx-auto w-full px-5 py-6 md:py-10 container-custom">
+    
+    <!-- top bar + copy button -->
+    <div class="flex justify-between items-center mb-8 flex-wrap gap-3">
+      <div class="flex items-center gap-2.5">
+        <div class="w-2.5 h-2.5 bg-[#a78bfa] rounded-full animate-pulse shadow-[0_0_6px_#a78bfa]"></div>
+        <span class="mono text-[11px] sm:text-xs font-bold tracking-[0.2em] text-[#c4b5fd] uppercase">NELLY // 1ST.PETER</span>
+      </div>
+      <button onclick="copyProfileURL()" 
+              class="flex items-center gap-2 px-5 py-2.5 bg-black/40 hover:bg-[#1e1e2c] border border-[#a78bfa]/50 rounded-2xl text-xs font-mono transition-all active:scale-95 backdrop-blur-md group">
+        <svg class="w-3.5 h-3.5 group-hover:rotate-12 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16v-4m4 4v4m4-8v8m4-4v-4m-16 4h16" />
+        </svg>
+        <span class="tracking-wide">COPY LINK</span>
+      </button>
+    </div>
+
+    <!-- PROFILE SECTION -->
+    <div class="flex flex-col items-center text-center mb-10">
+      <div class="relative mb-7">
+        <div class="avatar-ring w-36 h-36 sm:w-40 sm:h-40 rounded-3xl overflow-hidden ring-4 ring-[#a78bfa]/60 ring-offset-4 ring-offset-[#050507] transition-transform duration-500 hover:scale-[1.02]">
+          <img id="avatarImg"
+               src="https://res.cloudinary.com/dkfsr0g6x/image/upload/v1768987890/IMG_0933_aemheb.jpg"
+               alt="1st.peter mathias profile"
+               class="w-full h-full object-cover object-center"
+               onerror="this.src='https://ui-avatars.com/api/?background=a78bfa&color=fff&size=160&bold=true&name=1P';">
+        </div>
+        <div class="absolute -bottom-3 -right-2 bg-black/80 backdrop-blur-md text-[#a78bfa] text-[11px] font-mono px-3 py-1.5 rounded-full border border-[#a78bfa]/60 flex items-center gap-1.5 shadow-xl">
+          <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
+          <span class="tracking-wide">ACTIVE</span>
+        </div>
+      </div>
+
+      <h1 data-text="1st.peter" class="glitch-text text-6xl sm:text-7xl font-black mono tracking-tighter bg-gradient-to-r from-[#e2d9ff] via-[#c084fc] to-[#a855f7] bg-clip-text text-transparent profile-name">
+        1st.peter
+      </h1>
+      <p class="mono text-[#5ee0fa] text-sm tracking-[0.3rem] mt-2 font-semibold">FULL‑STACK ARCHITECT</p>
+
+      <div class="mt-7 max-w-sm text-[#a1b3cf] text-[15px] leading-relaxed space-y-2">
+        <p>⚡ Digital alchemist • Web sorcerer • Red‑team philosopher.<br>
+        🛡️ Ethical shadow‑walker | Email‑flow warlord & security researcher.</p>
+        <p class="text-[#c4b5fd] font-mono text-sm">✦ HTML • CSS • TS/JS • Python • PHP • Go ✦</p>
+        <p class="text-xs text-[#7e8ab0]">breaking things professionally • building obsessively</p>
+      </div>
+    </div>
+
+    <!-- DEMO SPOTIFY NOW PLAYING with Animated Icon -->
+    <div class="spotify-card flex items-center gap-5 p-5 rounded-2xl mb-10 transition-all hover:shadow-[0_8px_25px_-10px_#a78bfa40] hover:scale-[1.02]">
+      <div class="flex-shrink-0 relative">
+        <img id="spotifyCover" src="https://i.scdn.co/image/ab67616d0000b273e3e3b64aa5f221a8b9e8af00"
+             alt="album art" class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl shadow-2xl object-cover ring-1 ring-[#a78bfa]/40 transition-all duration-500">
+        <!-- Overlay animated icon on album art -->
+        <div class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl opacity-0 hover:opacity-100 transition-opacity duration-300">
+          <span class="text-3xl animated-music-icon">🎵</span>
+        </div>
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 mb-1">
+          <div class="music-bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+          <div class="text-[11px] font-mono text-[#a78bfa] uppercase tracking-wider flex items-center gap-1">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a78bfa] opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-[#a78bfa]"></span>
+            </span>
+            <span>🎧 CODING VIBE</span>
+          </div>
+        </div>
+        <div id="spotifyTrack" class="font-semibold text-base sm:text-xl truncate mt-1 track-pulse">Loading...</div>
+        <div id="spotifyArtist" class="text-xs sm:text-sm text-[#8a99c4] truncate">—</div>
+      </div>
+      <div class="spotify-icon-container">
+        <span class="text-3xl animated-music-icon">🎵</span>
+        <span class="text-2xl text-[#1DB954] animate-pulse">♫</span>
+      </div>
+    </div>
+
+    <!-- LINKS GRID (all major platforms) -->
+    <div class="space-y-4">
+      
+      <!-- GitHub -->
+      <a href="https://github.com/biggerboy1stPeter" target="_blank" rel="noopener noreferrer" class="link-card block rounded-2xl px-6 py-5 relative overflow-hidden">
+        <div class="shine-overlay"></div>
+        <div class="flex items-center gap-5">
+          <svg class="w-7 h-7 text-[#a78bfa]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          <div class="flex-1"><div class="font-bold text-xl">GitHub</div><div class="text-sm text-[#7e8bb0]">repos • open source craft</div></div>
+          <span class="text-[#a78bfa] text-2xl">↗</span>
+        </div>
+      </a>
+
+      <!-- X (Twitter) -->
+      <a href="https://x.com/peter59947130?s=21" target="_blank" class="link-card block rounded-2xl px-6 py-5 relative overflow-hidden">
+        <div class="shine-overlay"></div>
+        <div class="flex items-center gap-5"><span class="text-4xl">𝕏</span><div class="flex-1"><div class="font-bold text-xl">X / Twitter</div><div class="text-sm text-[#7e8bb0]">tech threads & insights</div></div><span class="text-[#a78bfa] text-2xl">↗</span></div>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="http://linkedin.com/in/peter-mathias-011572391" target="_blank" class="link-card block rounded-2xl px-6 py-5 relative overflow-hidden">
+        <div class="shine-overlay"></div>
+        <div class="flex items-center gap-5"><svg class="w-7 h-7 text-[#0a66c2]" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.238 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.784 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v7.759z"/></svg><div class="flex-1"><div class="font-bold text-xl">LinkedIn</div><div class="text-sm text-[#7e8bb0]">professional network</div></div><span class="text-[#a78bfa] text-2xl">↗</span></div>
+      </a>
+
+      <!-- Portfolio -->
+      <a href="https://petersportfo.netlify.app/" target="_blank" class="link-card block rounded-2xl px-6 py-5 relative overflow-hidden">
+        <div class="shine-overlay"></div>
+        <div class="flex items-center gap-5"><svg class="w-7 h-7 text-[#a78bfa]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg><div class="flex-1"><div class="font-bold text-xl">Portfolio</div><div class="text-sm text-[#7e8bb0]">live projects • case studies</div></div><span class="text-[#a78bfa] text-2xl">↗</span></div>
+      </a>
+
+      <!-- DEV Blog -->
+      <a href="https://dev.to/yourusername" target="_blank" class="link-card block rounded-2xl px-6 py-5 relative overflow-hidden">
+        <div class="shine-overlay"></div>
+        <div class="flex items-center gap-5"><span class="text-4xl">📝</span><div class="flex-1"><div class="font-bold text-xl">DEV Blog</div><div class="text-sm text-[#7e8bb0]">tutorials & deep dives</div></div><span class="text-[#a78bfa] text-2xl">↗</span></div>
+      </a>
+
+      <!-- Discord Community -->
+      <a href="https://discord.gg/4hCWMdWc8" target="_blank" class="link-card block rounded-2xl px-6 py-5 relative overflow-hidden">
+        <div class="shine-overlay"></div>
+        <div class="flex items-center gap-5"><span class="text-4xl">💬</span><div class="flex-1"><div class="font-bold text-xl">Discord</div><div class="text-sm text-[#7e8bb0]">join the squad • dev community</div></div><span class="text-[#a78bfa] text-2xl">↗</span></div>
+      </a>
+
+      <!-- YouTube Channel -->
+      <a href="https://youtube.com/@mathiaspeter-kh4su?si=ubYh-mcgH3nT1t2V" target="_blank" class="link-card block rounded-2xl px-6 py-5 relative overflow-hidden">
+        <div class="shine-overlay"></div>
+        <div class="flex items-center gap-5"><span class="text-4xl">▶️</span><div class="flex-1"><div class="font-bold text-xl">YouTube</div><div class="text-sm text-[#7e8bb0]">live coding & tutorials</div></div><span class="text-[#a78bfa] text-2xl">↗</span></div>
+      </a>
+
+      <!-- Email direct -->
+      <a href="mailto:mathiaspeter113@gmail.com" class="link-card block rounded-2xl px-6 py-5 relative overflow-hidden">
+        <div class="shine-overlay"></div>
+        <div class="flex items-center gap-5"><span class="text-4xl">✉️</span><div class="flex-1"><div class="font-bold text-xl">Email me</div><div class="text-sm text-[#7e8bb0]">direct contact</div></div><span class="text-[#a78bfa] text-2xl">↗</span></div>
+      </a>
+    </div>
+
+    <!-- footer quote & signature -->
+    <div class="mt-14 text-center border-t border-[#a78bfa]/20 pt-8">
+      <div class="flex justify-center gap-3 text-xs font-mono text-[#5a679b]">
+        <span class="hover:text-[#c084fc] transition">#RedTeamMindset</span>
+        <span>•</span>
+        <span class="hover:text-[#c084fc] transition">digital alchemy</span>
+        <span>•</span>
+        <span class="hover:text-[#c084fc] transition">ethical hacking</span>
+      </div>
+      <div class="text-[#3b426b] text-[11px] font-mono mt-4">
+        <span>⚡ BUILT BY NELLY — 1ST.PETER // 2026 ⚡</span>
+      </div>
+      <p class="text-[#2a2f4e] text-[10px] mt-2">particles • tilt • animated music • glitch core</p>
+    </div>
+  </main>
+
+  <!-- Toast container -->
+  <div id="globalToast" class="hidden fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#0f0f16]/95 backdrop-blur-xl text-[#d9c8ff] px-7 py-3.5 rounded-2xl shadow-2xl border border-[#a78bfa]/60 z-[100] flex items-center gap-2 toast-notify">
+    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+    <span id="toastMessage" class="font-mono text-sm tracking-wide">Link copied to clipboard!</span>
+  </div>
+
+  <script>
+    // ==================== DEMO TRACKS WITH ANIMATED ICONS ====================
+    
+    const demoPlaylist = [
+      { 
+        track: "Midnight Coding Session", 
+        artist: "Synthwave Dreams",
+        cover: "https://i.scdn.co/image/ab67616d0000b273e3e3b64aa5f221a8b9e8af00",
+        vibe: "🎵"
+      },
+      { 
+        track: "Neon Debugger", 
+        artist: "Digital Alchemist",
+        cover: "https://i.scdn.co/image/ab67616d0000b273c5c3b3a7e4e8f5a9b2c1d8e3",
+        vibe: "🎧"
+      },
+      { 
+        track: "404: Chill Not Found", 
+        artist: "Lo-Fi Coder",
+        cover: "https://i.scdn.co/image/ab67616d0000b273a2b3c4d5e6f7a8b9c0d1e2f3",
+        vibe: "🌙"
+      },
+      { 
+        track: "Git Commit Beats", 
+        artist: "Push to Main",
+        cover: "https://i.scdn.co/image/ab67616d0000b273d4e5f6a7b8c9d0e1f2a3b4c5",
+        vibe: "💻"
+      },
+      { 
+        track: "Terminal Dreams", 
+        artist: "Root Access",
+        cover: "https://i.scdn.co/image/ab67616d0000b273e6f7a8b9c0d1e2f3a4b5c6d7",
+        vibe: "⌨️"
+      },
+      { 
+        track: "Open Source Love", 
+        artist: "Commit & Push",
+        cover: "https://i.scdn.co/image/ab67616d0000b273f8a9b0c1d2e3f4a5b6c7d8e9",
+        vibe: "❤️"
+      },
+      { 
+        track: "The Stack Overflow", 
+        artist: "Runtime Heroes",
+        cover: "https://i.scdn.co/image/ab67616d0000b273a0b1c2d3e4f5a6b7c8d9e0f1",
+        vibe: "🔥"
+      },
+      { 
+        track: "Ethical Hacker's Anthem", 
+        artist: "Red Team",
+        cover: "https://i.scdn.co/image/ab67616d0000b273b2c3d4e5f6a7b8c9d0e1f2a3",
+        vibe: "🛡️"
+      }
+    ];
+    
+    let currentTrackIndex = 0;
+    let trackInterval;
+    
+    function updateDemoTrack() {
+      const trackEl = document.getElementById('spotifyTrack');
+      const artistEl = document.getElementById('spotifyArtist');
+      const coverEl = document.getElementById('spotifyCover');
+      const vibeEl = document.querySelector('.spotify-icon-container .animated-music-icon');
+      
+      const track = demoPlaylist[currentTrackIndex];
+      
+      // Add fade out effect
+      trackEl.style.opacity = '0';
+      artistEl.style.opacity = '0';
+      coverEl.style.transform = 'scale(0.95)';
+      
+      setTimeout(() => {
+        trackEl.textContent = track.track;
+        artistEl.textContent = track.artist;
+        coverEl.src = track.cover;
+        if (vibeEl) vibeEl.textContent = track.vibe;
+        
+        // Fade in
+        trackEl.style.opacity = '1';
+        artistEl.style.opacity = '1';
+        coverEl.style.transform = 'scale(1)';
+      }, 200);
+      
+      // Move to next track
+      currentTrackIndex = (currentTrackIndex + 1) % demoPlaylist.length;
+    }
+    
+    // Start the demo playlist
+    function startDemoPlaylist() {
+      // Set initial track
+      const firstTrack = demoPlaylist[0];
+      document.getElementById('spotifyTrack').textContent = firstTrack.track;
+      document.getElementById('spotifyArtist').textContent = firstTrack.artist;
+      document.getElementById('spotifyCover').src = firstTrack.cover;
+      
+      // Change track every 10 seconds
+      trackInterval = setInterval(updateDemoTrack, 10000);
+      
+      console.log('🎵 Demo playlist started with animated icons!');
+    }
+    
+    // Show toast notification
+    function showToast(message, color = '#a78bfa') {
+      const toast = document.getElementById('globalToast');
+      const msgSpan = document.getElementById('toastMessage');
+      msgSpan.textContent = message;
+      toast.style.borderColor = color;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3000);
+    }
+    
+    // COPY LINK function
+    function copyProfileURL() {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('✨ Profile link copied to clipboard! ✨');
+      }).catch(() => {
+        alert("Manual copy: " + url);
+      });
+    }
+    
+    // ==================== INITIALIZATION ====================
+    
+    // INIT PARTICLES
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 70, density: { enable: true, value_area: 850 } },
+        color: { value: ["#a78bfa", "#c084fc", "#67e8f9", "#b77eff"] },
+        shape: { type: "circle" },
+        opacity: { value: 0.45, random: true, anim: { enable: true, speed: 0.6, opacity_min: 0.2 } },
+        size: { value: 2.8, random: true, anim: { enable: true, speed: 1.2, size_min: 0.8 } },
+        line_linked: { enable: true, distance: 140, color: "#a78bfa", opacity: 0.25, width: 1.2 },
+        move: { enable: true, speed: 1.6, direction: "none", random: true, straight: false, out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" }, resize: true },
+        modes: { grab: { distance: 135, line_linked: { opacity: 0.6 } }, push: { particles_nb: 3 } }
+      },
+      retina_detect: true
+    });
+
+    // Vanilla tilt for all .link-card
+    VanillaTilt.init(document.querySelectorAll(".link-card"), {
+      max: 12,
+      speed: 380,
+      glare: true,
+      "max-glare": 0.3,
+      perspective: 800,
+      scale: 1.01,
+      gyroscope: true
+    });
+
+    // Start the demo playlist
+    startDemoPlaylist();
+    
+    // Clean up interval on page unload
+    window.addEventListener('beforeunload', () => {
+      if (trackInterval) clearInterval(trackInterval);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        copyProfileURL();
+      }
+    });
+
+    // Animated entrance for link cards
+    window.addEventListener('load', () => {
+      console.log('🎵 Animated music icons active - Enjoy the coding vibes!');
+      
+      const cards = document.querySelectorAll('.link-card');
+      cards.forEach((card, idx) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(26px)';
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.5s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 80 + idx * 55);
+      });
+      
+      // Avatar click easter egg
+      const avatar = document.getElementById('avatarImg');
+      if(avatar) {
+        avatar.addEventListener('click', () => {
+          avatar.style.transform = 'rotate(360deg) scale(1.02)';
+          setTimeout(() => avatar.style.transform = 'rotate(0deg) scale(1)', 600);
+          showToast('🎭 Easter egg activated!', '#c084fc');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
