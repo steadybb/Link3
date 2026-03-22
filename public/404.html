@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | 1st.peter mathias</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #020205 0%, #0a0a12 100%);
+      color: #a78bfa;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      margin: 0;
+    }
+    .container {
+      max-width: 600px;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 6rem;
+      margin: 0;
+      animation: glitch 3s infinite;
+    }
+    @keyframes glitch {
+      0%, 100% { text-shadow: -2px 0 #ff00c1, 2px 0 #00fff9; }
+      25% { text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9; }
+      50% { text-shadow: -2px 0 #ff00c1, 2px 0 #00fff9; }
+      75% { text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9; }
+    }
+    a {
+      color: #c084fc;
+      text-decoration: none;
+      border: 1px solid #a78bfa;
+      padding: 10px 20px;
+      border-radius: 30px;
+      display: inline-block;
+      margin-top: 20px;
+      transition: all 0.3s;
+    }
+    a:hover {
+      background: #a78bfa;
+      color: #020205;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <p style="font-size: 1.2rem; margin: 20px 0;">Page not found in the digital void</p>
+    <p style="color: #7e8ab0;">The page you're looking for doesn't exist or has been moved.</p>
+    <a href="/">← Return to Home</a>
+  </div>
+</body>
+</html>
