@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: peter-mathias-profile
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SPOTIFY_CLIENT_ID
+        sync: false
+      - key: SPOTIFY_CLIENT_SECRET
+        sync: false
+    healthCheckPath: /health
+    autoDeploy: true
